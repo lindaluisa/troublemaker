@@ -23,7 +23,9 @@ body {}
  
 h1 {}
  
-h2 {}
+h2 {
+  color: white;
+}
  
 h3 {}
  
@@ -35,9 +37,6 @@ h3 {}
  
 #site-main {}
  
- 
- 
- 
 /* ---- components ---- */
 
 .navbar-brand{
@@ -45,7 +44,6 @@ h3 {}
   letter-spacing: 2px;
 }
 .red-navbar {
-
   background-color: #c00;
   color: white;
 }
@@ -55,6 +53,23 @@ h3 {}
   fill: white;
 }
 
+.background-image {
+  background: url('/images/people.jpg');
+  height: 90vh;
+  background-size: cover;
+  padding-top: 5vh;
+}
+
+#box{
+  color: white;
+  margin: 0px auto;
+  display: flex;
+	flex-direction: column;
+	flex-wrap: nowrap;
+	justify-content: center;
+	align-items: center;
+  align-content: stretch;
+}
 
 .footer{
   padding-top: 5vh;
