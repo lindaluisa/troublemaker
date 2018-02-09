@@ -1,8 +1,50 @@
-body {
-  padding: 50px;
-  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+/* ---- reset ---- */
+ 
+html {
+  box-sizing: border-box;
 }
+*, *:before, *:after {
+  box-sizing: inherit;
+}
+ 
+ 
+/* ---- typography ---- */
 
-a {
-  color: #00B7FF;
+@font-face {
+  font-family: 'TheBattleCont';
+  src: url('webfont.eot'); /* IE9 Compat Modes */
+  src: url('webfont.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */
+       url('webfont.woff') format('woff'), /* Modern Browsers */
+       url('TheBattleCont.ttf')  format('truetype'), /* Safari, Android, iOS */
+       url('webfont.svg#svgFontName') format('svg'); /* Legacy iOS */
+}
+ 
+body {}
+ 
+h1 {}
+ 
+h2 {}
+ 
+h3 {}
+ 
+/* ---- layout ---- */
+ 
+#site-header {}
+ 
+#site-footer {}
+ 
+#site-main {}
+ 
+ 
+ 
+ 
+/* ---- components ---- */
+
+.navbar-brand{
+  font-family: 'Rock Salt', cursive;
+}
+.red-navbar {
+
+  background-color: #c00;
+  color: white;
 }
