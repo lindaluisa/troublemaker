@@ -5,16 +5,44 @@
   <title>Troublemaker</title>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <link rel="stylesheet" href="/stylesheets/style.css">
+  <script src="https://use.fontawesome.com/f22f21b6f3.js"></script>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+  <link href="https://fonts.googleapis.com/css?family=Rock+Salt" rel="stylesheet">
+  <link rel="stylesheet" href="./stylesheets/style.css">
 </head>
 
 <body>
-  <header>
-      <h1>Hello, Troublemaker!</h1>
-  </header>
+  <!-- boostrap navbar -->
+  <nav class="navbar red-navbar ">
+        <span class="navbar-brand mb-0 h1"> 
+            <!-- <svg class="header-logo"><use xlink:href="/images/rioter.svg"></use></svg> -->
+             <img class="header-logo" src="/images/rioter-white.png" alt="">           
+            Troublemaker
+        </span>          
+  </nav>
+
   <%- body %>
-  <footer>
-    <p>Site footer</p>
-  </footer>
+
+  <!-- bootstrap footer -->
+  <div class="footer text-muted">    
+      <div class="container footer-wrapper">               
+             <p>
+                 <span class="footer-element"><em>Coded by</em>
+                      <!-- <img src="/images/fist.png" class="footer-icon" alt=""> -->
+                </span>
+                 <!-- <span class="footer-element"><em>by</em></span> -->
+                 <span class="footer-element"><i class="fa fa-github"></i></span>
+                 <a href="https://github.com/JoniWanKenobi" target="_blank"><strong>JoniWanKenobi</strong></a>                       
+                 <span class="footer-element"><em>and</em></span> 
+                 <span class="footer-element"><i class="fa fa-github"></i></span>
+                 <a href="https://github.com/lindaluisa" target="_blank"><strong>lindaluisa</strong></a>
+                 <!-- <span class="footer-element">
+                      <i class="fa fa-at fa-1x"></i>
+                  </span>
+                  <span class="footer-element"><img class="footer-logo" src="/images/ironhack-log.png"></span>
+                  Ironhack Barcelona -->
+              </p>              
+      </div>     
+  </div>
 </body>
 </html>
