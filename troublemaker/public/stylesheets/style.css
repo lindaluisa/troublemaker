@@ -71,6 +71,10 @@ h3 {}
   align-content: stretch;
 }
 
+.homepage-form {
+  display: inline-block;
+}
+
 .footer{
   padding-top: 5vh;
   border-top: 1px solid lightgray;
