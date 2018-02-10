@@ -8,7 +8,7 @@ const expressLayouts = require('express-ejs-layouts');
 const mongoose = require('mongoose');
 
 const index = require('./routes/index');
-const users = require('./routes/users');
+const auth = require('./routes/auth');
 
 const app = express();
 
@@ -33,7 +33,7 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', index);
-app.use('/users', users);
+app.use('/', auth);
 
 // -- 404 and error handler
 // NOTE: requires a views/not-found.ejs template

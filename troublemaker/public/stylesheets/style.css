@@ -54,14 +54,17 @@ h3 {}
 }
 
 .background-image {
+  color: white;
   background: url('/images/people.jpg');
-  height: 90vh;
   background-size: cover;
   padding-top: 5vh;
 }
 
-#box{
-  color: white;
+.main-body {
+  height: 90vh;
+}
+
+.box {
   margin: 0px auto;
   display: flex;
 	flex-direction: column;
