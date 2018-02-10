@@ -40,7 +40,7 @@ h3 {}
 /* ---- components ---- */
 
 .navbar-brand{
-  font-family: 'Rock Salt', cursive;
+  font-family: 'Roboto Mono', monospace;
   letter-spacing: 2px;
 }
 .red-navbar {
@@ -49,7 +49,7 @@ h3 {}
 }
 
 .header-logo{
-  height: 66px;
+  height: 45px;
   fill: white;
 }
 
