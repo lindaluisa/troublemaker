@@ -6,7 +6,8 @@ const cookieParser = require('cookie-parser');
 const bodyParser = require('body-parser');
 const expressLayouts = require('express-ejs-layouts');
 const mongoose = require('mongoose');
-const bcrypt = require('bcrypt');
+const session = require('express-session');
+const MongoStore = require('connect-mongo')(session);
 
 const index = require('./routes/index');
 const auth = require('./routes/auth');
@@ -18,6 +19,15 @@ mongoose.connect('mongodb://localhost/troublemaker', {
   keepAlive: true,
   reconnectTries: Number.MAX_VALUE
 });
+
+app.use(session({
+  secret: 'start-the-revolution',
+  cookie: {maxAge: 60000},
+  store: new MongoStore({
+    mongooseConnection: mongoose.connection,
+    ttl: 24 * 60 * 60
+  })
+}));
 
 // view engine setup
 app.use(expressLayouts);
