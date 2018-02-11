@@ -1,0 +1,52 @@
+<div class="container main-body stretch-box">
+    <h2>The revolution starts NOW!</h2>
+
+  <form id="form" action="/create-rev" method="POST">
+  <div class="form-group">
+      <label for="name">Name</label>
+      <input type="text" class="form-control" id="name" name="name" placeholder="e.g. XXX">
+  </div>
+
+  <div class="form-group">
+    <label for="date">Date</label>
+    <input type="date" class="form-control" id="date" name="date" min="2018-02-11" max="2020-02-11" required>
+  </div>
+
+  <div class="form-group">
+      <label for="latitude">Latitude</label>
+      <input type="text" class="form-control" id="latitude" name="latitude">
+  </div>
+
+  <div class="form-group">
+      <label for="longitude">Longitude</label>
+      <input type="text" class="form-control" id="longitude" name="longitude">
+  </div>
+
+  <div class="form-group">
+      <label for="molotovScale">Molotov Scale</label>
+      <select class="form-control" id="molotovScale" name="molotovScale">
+        <option>1</option>
+        <option>2</option>
+        <option>3</option>
+        <option>4</option>
+        <option>5</option>
+        </select>
+  </div>
+
+  <div class="form-group">
+      <label for="description">Description</label>
+      <input type="text" class="form-control" id="description" name="description">
+  </div>
+
+  <div class="form-group">
+      <label for="call">Call to action</label>
+      <textarea class="form-control" id="call" name="call">
+        </textarea>
+  </div>
+  
+    <button type="submit" class="btn btn-danger">Create a Revolution!</button>
+  </form>
+  <% if(typeof message !== "undefined") {%>
+    <div class="alert alert-danger"><%= message %></div>
+  <% } %>
+</div>

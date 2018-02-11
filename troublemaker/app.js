@@ -11,6 +11,7 @@ const MongoStore = require('connect-mongo')(session);
 
 const index = require('./routes/index');
 const auth = require('./routes/auth');
+const revolutions = require('./routes/revolutions');
 
 const app = express();
 
@@ -50,6 +51,7 @@ app.use((req, res, next) => {
 
 app.use('/', index);
 app.use('/', auth);
+app.use('/', revolutions);
 
 // -- 404 and error handler
 // NOTE: requires a views/not-found.ejs template

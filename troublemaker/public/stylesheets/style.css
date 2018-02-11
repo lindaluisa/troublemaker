@@ -63,7 +63,17 @@ form {
 }
 
 .main-body {
-  height: 90vh;
+  min-height: 90vh;
+}
+
+.stretch-box {
+  margin: 0px auto;
+  display: flex;
+	flex-direction: column;
+	flex-wrap: nowrap;
+	justify-content: space-evenly;
+	align-items: stretch;
+  align-content: stretch;
 }
 
 .box {
