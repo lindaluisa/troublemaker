@@ -1,5 +1,8 @@
-var express = require('express');
-var router = express.Router();
+const express = require('express');
+const router = express.Router();
+
+const bcrypt = require('bcrypt');
+const bcryptSalt = 10;
 
 const User = require('../models/user');
 
@@ -12,6 +15,8 @@ router.get('/signup', (req, res, next) => {
 router.post('/signup', (req, res, next) => {
   const username = req.body.username;
   const password = req.body.password;
+  const salt = bcrypt.genSaltSync(bcryptSalt);
+  const hashPass = bcrypt.hashSync(password, salt);
 
   if (username === '' || password === '') {
     const message = 'Both fields are required';
@@ -19,7 +24,7 @@ router.post('/signup', (req, res, next) => {
   }
   const newUser = new User({
     username: username,
-    password: password
+    password: hashPass
   });
 
   newUser.save((err) => {
