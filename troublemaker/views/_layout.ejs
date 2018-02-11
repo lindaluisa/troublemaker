@@ -16,9 +16,18 @@
 <nav class="navbar red-navbar ">
     <span class="navbar-brand mb-0 h1"> 
         <!-- <svg class="header-logo"><use xlink:href="/images/rioter.svg"></use></svg> -->
-        <img class="header-logo" src="/images/rioter-white.png" alt="">           
+        <img class="header-logo" src="/images/rioter-white.png" alt="">
             Troublemaker.org
-        </span>          
+        </span>
+        <% if (locals.user !== null) { %>
+            <form action="/logout" method="POST">
+                <ul class="navbar-nav mr-auto">
+                    <li class="nav-item">
+                        <button class="btn btn-outline-warning" type="submit">Logout</button>
+                    </li>
+                </ul>
+            </form> 
+        <% } %>
   </nav>
   
   <div>

@@ -56,6 +56,7 @@ router.get('/login', (req, res, next) => {
   res.render('login');
 });
 
+/* POST login */
 router.post('/login', (req, res, next) => {
   const username = req.body.username;
   const password = req.body.password;
@@ -86,6 +87,12 @@ router.post('/login', (req, res, next) => {
       return res.render('login', {message});
     }
   };
+});
+
+/* POST logout */
+router.post('/logout', (req, res, next) => {
+  req.session.currentUser = null;
+  res.redirect('/');
 });
 
 module.exports = router;
