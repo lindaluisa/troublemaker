@@ -21,6 +21,10 @@ router.post('/create-rev', (req, res, next) => {
   const callToAction = req.body.callToAction;
 
   console.log('req.session.currentUser', creator);
+  if (name === '' || latitude === '' || longitude === '' || molotovScale === '' || description === '' || callToAction === '') {
+    const message = 'All fields are required';
+    return res.render('create-rev', {message});
+  }
 
   const newRev = new Revolution({
     name: name,
@@ -32,12 +36,17 @@ router.post('/create-rev', (req, res, next) => {
     participants: participants,
     callToAction: callToAction
   });
+
   newRev.save()
     .then(() => {
       res.redirect('/revolutions');
     }).catch((err) => {
       throw new Error(err);
     });
+});
+
+router.get('/revolutions', (req, res, next) => {
+  res.render('revolutions');
 });
 
 module.exports = router;
