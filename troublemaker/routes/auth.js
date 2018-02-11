@@ -12,10 +12,16 @@ router.get('/signup', (req, res, next) => {
 router.post('/signup', (req, res, next) => {
   const username = req.body.username;
   const password = req.body.password;
+
+  if (username === '' || password === '') {
+    const message = 'Both fields are required';
+    return res.render('signup', {message});
+  }
   const newUser = new User({
     username: username,
     password: password
   });
+
   newUser.save((err) => {
     if (err) {
       return next(err);
