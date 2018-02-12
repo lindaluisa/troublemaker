@@ -75,4 +75,8 @@ router.get('/revolutions', (req, res, next) => {
     });
 });
 
+router.get('/revolution-details', (req, res, next) => {
+  res.render('revolution-details');
+});
+
 module.exports = router;

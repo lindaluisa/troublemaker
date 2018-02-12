@@ -38,6 +38,7 @@ form {
   background-color: whitesmoke;
   text-align: center;
   padding: 2vh;
+  margin-bottom: 2vh;
 }
  
 #site-footer {}
@@ -111,6 +112,12 @@ form {
 
 .rev-list{
   flex: 1 50;
+}
+
+.rev-details-header{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 
 /* .list-group-item {
