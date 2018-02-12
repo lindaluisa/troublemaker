@@ -19,7 +19,7 @@
         <img class="header-logo" src="/images/rioter-white.png" alt="">
             Troublemaker.org
         </span>
-        <% if (typeof locals.user !== 'undefined') { %>
+        <% if (user) { %>
             <form action="/logout" method="POST">
                 <ul class="navbar-nav mr-auto">
                     <li class="nav-item">

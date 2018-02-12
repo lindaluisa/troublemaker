@@ -24,7 +24,6 @@ body {}
 h1 {}
  
 h2 {
-  margin-top: 5vh;
 }
  
 h3 {}
@@ -35,7 +34,11 @@ form {
  
 /* ---- layout ---- */
  
-#site-header {}
+.site-header {
+  background-color: whitesmoke;
+  text-align: center;
+  padding: 2vh;
+}
  
 #site-footer {}
  
@@ -62,10 +65,11 @@ form {
   background: url('/images/people.jpg');
   background-size: cover;
   padding-top: 5vh;
+  min-height: 80vh;
 }
 
 .main-body {
-  min-height: 90vh;
+  min-height: 70vh;
 }
 
 .stretch-box {
