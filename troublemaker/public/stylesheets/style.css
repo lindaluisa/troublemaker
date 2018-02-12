@@ -38,7 +38,12 @@ form {
   background-color: whitesmoke;
   text-align: center;
   padding: 2vh;
-  margin-bottom: 2vh;
+  margin-bottom: 5vh;
+}
+
+.site-header a{
+  text-decoration: none;
+  color: #c00;
 }
  
 #site-footer {}
@@ -118,6 +123,10 @@ form {
   display: flex;
   justify-content: space-between;
   align-items: center;
+}
+
+.card-footer a{
+  margin: 1vh 1vh;
 }
 
 /* .list-group-item {
