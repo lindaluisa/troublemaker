@@ -8,13 +8,23 @@ const User = require('../models/user');
 
 /* GET signup */
 router.get('/signup', (req, res, next) => {
+  if (req.session.currentUser) {
+    const message = 'You are already one of us!!';
+    return res.render('signup', {message});
+  }
   res.render('signup');
 });
 
 /* POST signup */
 router.post('/signup', (req, res, next) => {
+  if (req.session.currentUser) {
+    const message = 'You are already one of us!!';
+    return res.render('signup', {message});
+  }
+
   const username = req.body.username;
   const password = req.body.password;
+
   const salt = bcrypt.genSaltSync(bcryptSalt);
   const hashPass = bcrypt.hashSync(password, salt);
 
@@ -23,7 +33,7 @@ router.post('/signup', (req, res, next) => {
     return res.render('signup', {message});
   }
 
-  let dbPromise = User.findOne({'username': username}, 'username');
+  const dbPromise = User.findOne({'username': username}, 'username');
   dbPromise.then((result) => {
     if (result !== null) {
       const message = 'This comrade already exists';
@@ -45,7 +55,8 @@ router.post('/signup', (req, res, next) => {
       if (err) {
         return next(err);
       } else {
-        res.redirect('revolutions');
+        req.session.currentUser = newUser;
+        res.redirect('/revolutions');
       }
     });
   };
@@ -53,13 +64,23 @@ router.post('/signup', (req, res, next) => {
 
 /* GET login */
 router.get('/login', (req, res, next) => {
+  if (req.session.currentUser) {
+    const message = 'You are already logged in!!';
+    return res.render('login', {message});
+  }
   res.render('login');
 });
 
 /* POST login */
 router.post('/login', (req, res, next) => {
+  if (req.session.currentUser) {
+    const message = 'You are already logged in!!';
+    return res.render('login', {message});
+  }
+
   const username = req.body.username;
   const password = req.body.password;
+
   const salt = bcrypt.genSaltSync(bcryptSalt);
   const hashPass = bcrypt.hashSync(password, salt);
 

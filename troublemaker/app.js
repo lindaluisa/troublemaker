@@ -1,6 +1,6 @@
 const express = require('express');
 const path = require('path');
-const favicon = require('serve-favicon');
+// const favicon = require('serve-favicon');
 const logger = require('morgan');
 const cookieParser = require('cookie-parser');
 const bodyParser = require('body-parser');
@@ -21,15 +21,6 @@ mongoose.connect('mongodb://localhost/troublemaker', {
   reconnectTries: Number.MAX_VALUE
 });
 
-app.use(session({
-  secret: 'start-the-revolution',
-  cookie: {maxAge: 60000},
-  store: new MongoStore({
-    mongooseConnection: mongoose.connection,
-    ttl: 24 * 60 * 60
-  })
-}));
-
 // view engine setup
 app.use(expressLayouts);
 app.set('views', path.join(__dirname, 'views'));
@@ -43,6 +34,19 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
+
+app.use(session({
+  store: new MongoStore({
+    mongooseConnection: mongoose.connection,
+    ttl: 24 * 60 * 60 // 1 day
+  }),
+  secret: 'some-string',
+  resave: true,
+  saveUninitialized: true,
+  cookie: {
+    maxAge: 24 * 60 * 60 * 1000
+  }
+}));
 
 app.use((req, res, next) => {
   app.locals.user = req.session.currentUser;

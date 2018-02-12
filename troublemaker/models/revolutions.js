@@ -7,7 +7,13 @@ const revSchema = new Schema({
   molotovScale: Number,
   description: String,
   participants: [{type: Schema.Types.ObjectId, ref: 'User'}],
-  location: {latitude: Number, longitude: Number},
+  location: {
+    type: {
+      type: String,
+      default: 'Point'
+    },
+    coordinates: [Number]
+  },
   callToAction: String,
   creator: {type: Schema.Types.ObjectId, ref: 'User'}
 
@@ -17,6 +23,8 @@ const revSchema = new Schema({
     updatedAt: 'updated_at'
   }
 });
+
+revSchema.index({location: '2dsphere'});
 
 const Revolution = mongoose.model('Revolution', revSchema);
 

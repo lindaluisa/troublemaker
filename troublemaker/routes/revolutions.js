@@ -3,6 +3,14 @@ const router = express.Router();
 
 const Revolution = require('../models/revolutions');
 
+router.use((req, res, next) => {
+  if (req.session.currentUser) {
+    next();
+  } else {
+    res.redirect('/login');
+  }
+});
+
 /* GET create-rev */
 router.get('/create-rev', (req, res, next) => {
   res.render('create-rev');
@@ -18,7 +26,7 @@ router.post('/create-rev', (req, res, next) => {
   const description = req.body.description;
   const creator = req.session.currentUser._id;
   const participants = [creator];
-  const callToAction = req.body.callToAction;
+  const callToAction = req.body.call;
 
   console.log('req.session.currentUser', creator);
   if (name === '' || latitude === '' || longitude === '' || molotovScale === '' || description === '' || callToAction === '') {
@@ -29,7 +37,11 @@ router.post('/create-rev', (req, res, next) => {
   const newRev = new Revolution({
     name: name,
     date: date,
-    location: {latitude: latitude, longitude: longitude},
+
+    location: {
+      type: 'Point',
+      coordinates: [latitude, longitude]
+    },
     molotovScale: molotovScale,
     description: description,
     creator: creator,
