@@ -23,7 +23,9 @@ body {}
  
 h1 {}
  
-h2 {}
+h2 {
+  margin-top: 5vh;
+}
  
 h3 {}
 
@@ -86,8 +88,25 @@ form {
   align-content: stretch;
 }
 
+.rev-box{
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  align-items: center;
+}
+
 .homepage-form {
   display: inline-block;
+}
+.test-map {
+  min-height: 60vh;
+  min-width: 50vh;
+  flex: 1 50;
+  margin: 3vh;
+}
+
+.rev-list{
+  flex: 1 50;
 }
 
 .footer{
