@@ -59,7 +59,17 @@ router.post('/create-rev', (req, res, next) => {
 
 // arg results are the results of find function (dbs)
 router.get('/revolutions', (req, res, next) => {
-  Revolution.find({}).populate('creator')
+  Revolution.find({}).populate('creator').then((results) => {
+    return results.map((result) => {
+      result.description = result.description.substring(0, 200) + '...';
+      return result;
+    });
+  })
+    .then((results) => {
+      return results.filter((result) => {
+        return result.date.getTime() >= Date.now();
+      });
+    })
     .then((revolutions) => {
       res.render('revolutions', {revolutions});
     });

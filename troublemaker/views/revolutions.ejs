@@ -15,11 +15,11 @@
         <a href="#" class="list-group-item list-group-item-action flex-column align-items-start">
             <div class="d-flex w-100 justify-content-between">
               <h5 class="mb-1"><%= revolution.name %></h5>
-              <small><strong>When: </strong><%= revolution.date.toLocaleDateString() %></small>
+              <small><strong>By comrade: </strong> <%= revolution.creator.username %></small>
             </div>
             <p class="mb-1"><%= revolution.description %></p>
-            <small><strong>By comrade: </strong> <% =revolution.creator._id %></small>
-            <p><small><strong>Where: </strong><strong>Address: </strong>Carrer de Pamplona 96, Barcelona</small></p>
+            <small><strong>When: </strong><%= revolution.date.toLocaleDateString() %></small>
+            <p><small><strong>Where: </strong>Carrer de Pamplona 96, Barcelona</small></p>
           </a>
       <% }) %>
     </div>

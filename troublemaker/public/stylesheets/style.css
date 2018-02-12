@@ -113,6 +113,12 @@ form {
   flex: 1 50;
 }
 
+/* .list-group-item {
+  overflow: hidden; 
+  text-overflow: ellipsis; 
+  white-space: nowrap;
+} */
+
 .footer{
   padding-top: 5vh;
   border-top: 1px solid lightgray;
