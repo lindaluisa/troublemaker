@@ -57,8 +57,12 @@ router.post('/create-rev', (req, res, next) => {
     });
 });
 
+// arg results are the results of find function (dbs)
 router.get('/revolutions', (req, res, next) => {
-  res.render('revolutions');
+  Revolution.find({}).populate('creator')
+    .then((revolutions) => {
+      res.render('revolutions', {revolutions});
+    });
 });
 
 module.exports = router;

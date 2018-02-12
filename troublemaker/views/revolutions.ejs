@@ -11,35 +11,17 @@
     </div>
 
     <div class="list-group rev-list">
-      <a href="#" class="list-group-item list-group-item-action flex-column align-items-start">
-        <div class="d-flex w-100 justify-content-between">
-          <h5 class="mb-1">Valentines Day Parade</h5>
-          <small><strong>When: </strong>14/02/2018</small>
-        </div>
-        <p class="mb-1">Buy as much as you can.</p>
-        <small><strong>By comrade: </strong>TheIronHackLady</small>
-        <p><small><strong>Where: </strong><strong>Address: </strong>Carrer de Pamplona 96, Barcelona</small></p>
-      </a>
-
-      <a href="#" class="list-group-item list-group-item-action flex-column align-items-start">
-          <div class="d-flex w-100 justify-content-between">
-            <h5 class="mb-1">rEVOLution</h5>
-            <small><strong>When: </strong>14/02/2018</small>
-          </div>
-          <p class="mb-1">Donec id elit non mi porta gravida at eget metus. Maecenas sed diam eget risus varius blandit.</p>
-          <small><strong>By comrade: </strong>Streetfighter</small>
-          <p><small><strong>Where: </strong><strong>Address: </strong>Carrer de Pamplona 96, Barcelona</small></p>
-        </a>
-
+      <% revolutions.forEach((revolution)=> { %>
         <a href="#" class="list-group-item list-group-item-action flex-column align-items-start">
             <div class="d-flex w-100 justify-content-between">
-              <h5 class="mb-1">Valentines Day Parade</h5>
-              <small><strong>When: </strong>14/02/2018</small>
+              <h5 class="mb-1"><%= revolution.name %></h5>
+              <small><strong>When: </strong><%= revolution.date.toLocaleDateString() %></small>
             </div>
-            <p class="mb-1">Donec id elit non mi porta gravida at eget metus. Maecenas sed diam eget risus varius blandit.</p>
-            <small><strong>By comrade: </strong>TheIronHackLady</small>
+            <p class="mb-1"><%= revolution.description %></p>
+            <small><strong>By comrade: </strong> <% =revolution.creator._id %></small>
             <p><small><strong>Where: </strong><strong>Address: </strong>Carrer de Pamplona 96, Barcelona</small></p>
           </a>
+      <% }) %>
     </div>
 
 </div>
