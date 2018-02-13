@@ -78,7 +78,8 @@ router.get('/revolution-details/:revolutionId', (req, res, next) => {
     .then((result) => {
       const data = {
         revolution: result,
-        isParticipant: checkIfParticipates(result.participants, req.session.currentUser._id)
+        isParticipant: checkIfParticipates(result.participants, req.session.currentUser._id),
+        userLocation: req.session.userLocation
       };
       console.log('revolution.participants: ', result.participants);
       return data;
@@ -97,7 +98,8 @@ router.post('/leave/:revolutionId', (req, res, next) => {
     .then((revolution) => {
       const data = {
         revolution: revolution,
-        isParticipant: checkIfParticipates(revolution.participants, req.session.currentUser._id)
+        isParticipant: checkIfParticipates(revolution.participants, req.session.currentUser._id),
+        userLocation: req.session.userLocation
       };
       res.render('revolution-details', data);
     })
@@ -113,7 +115,8 @@ router.post('/join/:revolutionId', (req, res, next) => {
     .then((revolution) => {
       const data = {
         revolution: revolution,
-        isParticipant: checkIfParticipates(revolution.participants, req.session.currentUser._id)
+        isParticipant: checkIfParticipates(revolution.participants, req.session.currentUser._id),
+        userLocation: req.session.userLocation
       };
       res.render('revolution-details', data);
     })
@@ -165,7 +168,7 @@ router.post('/create-rev', (req, res, next) => {
     .then(() => {
       res.redirect('/revolutions');
     }).catch((err) => {
-      throw new Error(err);
+      next(err);
     });
 });
 
@@ -199,6 +202,9 @@ router.get('/revolutions', (req, res, next) => {
         userLocation: req.session.userLocation
       };
       res.render('revolutions', data);
+    })
+    .catch((err) => {
+      next(err);
     });
 });
 
