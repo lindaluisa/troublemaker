@@ -11,23 +11,26 @@ google.maps.event.addListener(autocomplete, 'place_changed', getInfoPlace);
 
 function getInfoPlace () {
   const newPlace = autocomplete.getPlace();
-  console.log('newPlace Entire Object: ', newPlace);
-  console.log('newPlace Latitude: ', newPlace.geometry.location.lat());
-  console.log('newPlaceLongitude', newPlace.geometry.location.lng());
-}
-// const newPlace = autocomplete.getPlace();
-// console.log(newPlace);
+  const revLat = newPlace.geometry.location.lat();
+  const revLng = newPlace.geometry.location.lng();
 
-if (navigator.geolocation) {
-  navigator.geolocation.getCurrentPosition(function (position) {
-    var geolocation = {
-      lat: position.coords.latitude,
-      lng: position.coords.longitude
-    };
-    var circle = new google.maps.Circle({
-      center: geolocation,
-      radius: position.coords.accuracy
-    });
-    autocomplete.setBounds(circle.getBounds());
-  });
+  const revLatElement = document.getElementById('rev-lat');
+  const revLngElement = document.getElementById('rev-lng');
+
+  revLatElement.value = revLat;
+  revLngElement.value = revLng;
 }
+
+// if (navigator.geolocation) {
+//   navigator.geolocation.getCurrentPosition(function (position) {
+//     var geolocation = {
+//       lat: position.coords.latitude,
+//       lng: position.coords.longitude
+//     };
+//     var circle = new google.maps.Circle({
+//       center: geolocation,
+//       radius: position.coords.accuracy
+//     });
+//     autocomplete.setBounds(circle.getBounds());
+//   });
+// }

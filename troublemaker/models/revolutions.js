@@ -4,6 +4,7 @@ const Schema = mongoose.Schema;
 const revSchema = new Schema({
   name: String,
   date: Date,
+  address: String,
   molotovScale: Number,
   description: String,
   participants: [{type: Schema.Types.ObjectId, ref: 'User'}],

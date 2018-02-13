@@ -13,6 +13,24 @@ function checkIfParticipates (participantsArr, userId) {
   return isParticipant;
 };
 
+function getDistanceLatLng (lat1, lon1, lat2, lon2) {
+  var R = 6371; // Radius of the earth in km
+  var dLat = deg2rad(lat2 - lat1); // deg2rad below
+  var dLon = deg2rad(lon2 - lon1);
+  var a =
+    Math.sin(dLat / 2) * Math.sin(dLat / 2) +
+    Math.cos(deg2rad(lat1)) * Math.cos(deg2rad(lat2)) *
+    Math.sin(dLon / 2) * Math.sin(dLon / 2)
+    ;
+  var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+  var d = R * c; // Distance in km
+  return d;
+}
+
+function deg2rad (deg) {
+  return deg * (Math.PI / 180);
+}
+
 router.use((req, res, next) => {
   if (req.session.currentUser) {
     next();
@@ -113,8 +131,9 @@ router.get('/create-rev', (req, res, next) => {
 router.post('/create-rev', (req, res, next) => {
   const name = req.body.name;
   const date = req.body.date;
-  const latitude = req.body.latitude;
-  const longitude = req.body.longitude;
+  const address = req.body.address;
+  const latitude = req.body.revlat;
+  const longitude = req.body.revlng;
   const molotovScale = req.body.molotovScale;
   const description = req.body.description;
   const creator = req.session.currentUser._id;
@@ -130,7 +149,7 @@ router.post('/create-rev', (req, res, next) => {
   const newRev = new Revolution({
     name: name,
     date: date,
-
+    address: address,
     location: {
       type: 'Point',
       coordinates: [latitude, longitude]
@@ -152,19 +171,34 @@ router.post('/create-rev', (req, res, next) => {
 
 // arg results are the results of find function (dbs)
 router.get('/revolutions', (req, res, next) => {
-  Revolution.find({}).populate('creator').then((results) => {
-    return results.map((result) => {
-      result.description = result.description.substring(0, 200) + '...';
-      return result;
-    });
-  })
+  Revolution.find({}).populate('creator')
+    .then((results) => {
+      return results.map((result) => {
+        result.description = result.description.substring(0, 200) + '...';
+        return result;
+      });
+    })
     .then((results) => {
       return results.filter((result) => {
         return result.date.getTime() >= Date.now();
       });
     })
     .then((revolutions) => {
-      res.render('revolutions', {revolutions});
+      return revolutions.filter((revolution) => {
+        const revolutionLat = revolution.location.coordinates[0];
+        const revolutionLng = revolution.location.coordinates[1];
+        const userLat = req.session.userLocation.coordinates[0];
+        const userLng = req.session.userLocation.coordinates[1];
+        const distance = getDistanceLatLng(revolutionLat, revolutionLng, userLat, userLng);
+        return distance < 100;
+      });
+    })
+    .then((revolutions) => {
+      const data = {
+        revolutions: revolutions,
+        userLocation: req.session.userLocation
+      };
+      res.render('revolutions', data);
     });
 });
 

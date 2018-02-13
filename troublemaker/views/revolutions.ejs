@@ -17,10 +17,14 @@
             </div>
             <p class="mb-1"><%= revolution.description %></p>
             <small><strong>When: </strong><%= revolution.date.toLocaleDateString() %></small>
-            <p><small><strong>Where: </strong>Carrer de Pamplona 96, Barcelona</small></p>
+            <p><small><strong>Where: </strong><%= revolution.address %></small></p>
           </a>
       <% }) %>
     </div>
 </div>
+<script type="text/javascript">
+    var revolutions = <%- JSON.stringify(revolutions) %>;
+    var userLocation = <%- JSON.stringify(userLocation) %>;
+</script>
 <script src="/javascripts/revolutions.js"></script>
 

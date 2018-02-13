@@ -16,7 +16,7 @@ const revolutions = require('./routes/revolutions');
 const app = express();
 
 mongoose.Promise = Promise;
-mongoose.connect('mongodb://localhost/troublemaker', {
+mongoose.connect('mongodb://localhost/troublemakker', {
   keepAlive: true,
   reconnectTries: Number.MAX_VALUE
 });
