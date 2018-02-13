@@ -115,6 +115,11 @@ form {
   margin: 3vh;
 }
 
+#map{
+  min-height: 65vh;
+  min-width: 50vh;
+}
+
 .rev-list{
   flex: 1 50;
 }
