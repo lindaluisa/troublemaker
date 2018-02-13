@@ -41,13 +41,18 @@ router.get('/revolution-details/:revolutionId', (req, res, next) => {
     });
 });
 
+// userAccounts.update(
+//   { userId: usr.userId },
+//   { $pull: { connections : { _id : connId } } },
+//   { safe: true },
+//   function removeConnectionsCB(err, obj) {
+//       ...
+//   });
+
 router.post('/leave/:revolutionId', (req, res, next) => {
   const revolutionId = req.params.revolutionId;
-  Revolution.findOne({'_id': revolutionId})
+  Revolution.findOneAndUpdate({'_id': revolutionId}, { $pull: { participants: req.session.currentUser._id } }, {new: true})
     .then((revolution) => {
-      const isParticipant = checkIfParticipates(revolution.participants, req.session.currentUser._id);
-      const index = revolution.participants.indexOf(req.session.currentUser._id);
-      const removed = revolution.participants.splice(index, 1);
       const data = {
         revolution: revolution,
         isParticipant: checkIfParticipates(revolution.participants, req.session.currentUser._id)
@@ -61,20 +66,17 @@ router.post('/leave/:revolutionId', (req, res, next) => {
 
 router.post('/join/:revolutionId', (req, res, next) => {
   const revolutionId = req.params.revolutionId;
-  const userId = req.session.currentUser._id;
-  Revolution.findOne({'_id': revolutionId})
+  Revolution.findOneAndUpdate({'_id': revolutionId}, { $push: { participants: req.session.currentUser._id } }, {new: true})
     .populate('creator')
     .then((revolution) => {
-      const isParticipant = checkIfParticipates(revolution.participants, userId);
-      if (!isParticipant) {
-        revolution.participants.push(userId);
-      }
       const data = {
         revolution: revolution,
-        isParticipant: checkIfParticipates(revolution.participants, userId)
+        isParticipant: checkIfParticipates(revolution.participants, req.session.currentUser._id)
       };
-      console.log('revolution.creator: ', revolution.creator);
       res.render('revolution-details', data);
+    })
+    .catch((err) => {
+      next(err);
     });
 });
 
