@@ -6,25 +6,34 @@
   <div class="card">
     <div class="card-header rev-details-header">
       <div class="title-and-author">
-          <h5 class="card-title">Cuban Revolution</h5>
-          <h6 class="card-subtitle mb-2 text-muted"><small>by FidelCastro</small></h6>
+          <h5 class="card-title"><%= revolution.name %></h5>
+          <h6 class="card-subtitle mb-2 text-muted"><small>by <%= revolution.creator.username %></small></h6>
       </div>
       <div class="participants-intensity">
-          <p class="text-muted">Participants: <span class="badge badge-dark badge-pill">14</span></p>
-          <p class="text-muted">Intensity: <span class="badge badge-dark badge-pill">9</span></p>
+          <p class="text-muted">Participants: <span class="badge badge-dark badge-pill"><%= revolution.participants.length %></span></p>
+          <p class="text-muted">Intensity: <span class="badge badge-dark badge-pill"><%= revolution.molotovScale %></span></p>
       </div>        
     </div>
     <div class="card-body">
-      <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+      <p class="card-text"><%= revolution.description %></p>
            
     </div>
     <div class="card-footer text-muted rev-details-header">
       <div>
-          <a href="#" class="btn btn-outline-danger btn-sm"><i class="fa fa-play"></i> Call to action</a>        
-          <a href="#" class="btn btn-outline-danger btn-sm">Join the battle</a>        
+          <a href="#" class="btn btn-outline-danger btn-sm"><i class="fa fa-play"></i> Call to action</a>  
+          <% if(isParticipant){ %>
+            <form action="/leave/<%= revolution._id %>" method="POST">
+              <button type="submit" class="btn btn-outline-dark btn-sm">Give up the fight</button>
+            </form>            
+            <% } else { %>
+              <form action="/join/<%= revolution._id %>" method="POST">
+                <button type="submit" class="btn btn-outline-danger btn-sm">Join the battle</button> 
+              </form>              
+          <% } %>
+                 
       </div>
       <div>
-          <p><i class="fa fa-calendar"></i>  12/03/2018</p>
+          <p><i class="fa fa-calendar"></i> <%= revolution.date.toLocaleDateString() %></p>
           <p><i class="fa fa-map-marker"></i> Plaza Catalunya 34, Barcelona</p>
       </div>       
     </div>

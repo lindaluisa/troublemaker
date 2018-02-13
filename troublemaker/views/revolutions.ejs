@@ -12,7 +12,7 @@
 
     <div class="list-group rev-list">
       <% revolutions.forEach((revolution)=> { %>
-        <a href="/revolution-details" class="list-group-item list-group-item-action flex-column align-items-start">
+        <a href="/revolution-details/<%= revolution._id %>" class="list-group-item list-group-item-action flex-column align-items-start">
             <div class="d-flex w-100 justify-content-between">
               <h5 class="mb-1"><%= revolution.name %></h5>
               <small><strong>By comrade: </strong> <%= revolution.creator.username %></small>
