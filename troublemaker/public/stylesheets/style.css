@@ -45,6 +45,7 @@ form {
   text-decoration: none;
   color: #c00;
 }
+
  
 #site-footer {}
  
@@ -171,4 +172,12 @@ form {
   text-decoration: none;
   color: grey;
   
+}
+
+.hidden {
+  display: none;
+}
+
+#autocomplete {
+  margin: 4vh;
 }

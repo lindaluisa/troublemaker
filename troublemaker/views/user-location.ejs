@@ -1,0 +1,23 @@
+<div class=" background-image">
+  <div class="box container">
+      <div>
+          <h2 >Tell us where you are!!</h2>
+          <p>(don't worry: we'll keep it <em>encrypted... </em> )</p>
+      </div>
+      <div class="form-group">
+        <form action="/get-revolutions" method="POST">
+          <input type="text" id="autocomplete" name="stringLocation" class="form-control">
+          <button type="submit" class="btn btn-success">Submit</button>
+          <input type="text" name="userlat" id="user-lat" class="hidden">
+          <input type="text" name="userlng" id="user-lng" class="hidden">
+        </form>
+      </div>
+      <% if(typeof message !== "undefined") {%>
+        <div class="alert alert-danger"><%= message %></div>
+      <% } %>
+  </div>    
+</div>
+
+<script src="/javascripts/ul-autocomplete.js"></script>
+
+

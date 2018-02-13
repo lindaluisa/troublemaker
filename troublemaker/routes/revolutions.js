@@ -21,6 +21,38 @@ router.use((req, res, next) => {
   }
 });
 
+router.get('/user-location', (req, res, next) => {
+  res.render('user-location');
+});
+
+router.post('/get-revolutions', (req, res, next) => {
+  const userLat = req.body.userlat;
+  const userLng = req.body.userlng;
+  const stringLocation = req.body.stringLocation;
+  if (userLat === '' || userLng === '') {
+    const message = 'We need you to tell us where you are!! Think global, act LOCAL!!';
+    return res.render('user-location', {message});
+  }
+  const userLocation = {
+    stringLocation: stringLocation,
+    type: 'Point',
+    coordinates: [userLat, userLng]
+  };
+
+  req.session.userLocation = userLocation;
+  console.log('Session user location: ', req.session.userLocation);
+
+  res.redirect('revolutions');
+});
+
+router.use((req, res, next) => {
+  if (req.session.userLocation) {
+    next();
+  } else {
+    res.redirect('/user-location');
+  }
+});
+
 router.get('/revolution-details/:revolutionId', (req, res, next) => {
   const revolutionId = req.params.revolutionId;
   Revolution.findOne({'_id': revolutionId})
@@ -40,14 +72,6 @@ router.get('/revolution-details/:revolutionId', (req, res, next) => {
       next(err);
     });
 });
-
-// userAccounts.update(
-//   { userId: usr.userId },
-//   { $pull: { connections : { _id : connId } } },
-//   { safe: true },
-//   function removeConnectionsCB(err, obj) {
-//       ...
-//   });
 
 router.post('/leave/:revolutionId', (req, res, next) => {
   const revolutionId = req.params.revolutionId;
