@@ -73,6 +73,7 @@ form {
   background-size: cover;
   padding-top: 5vh;
   min-height: 80vh;
+  background-position: center
 }
 
 .main-body {
@@ -102,7 +103,7 @@ form {
 .rev-box{
   display: flex;
   flex-wrap: wrap;
-  justify-content: space-around;
+  justify-content: center;
   align-items: center;
 }
 
@@ -110,8 +111,8 @@ form {
   display: inline-block;
 }
 .test-map {
-  min-height: 60vh;
-  min-width: 50vh;
+  min-height: 10vh;
+  min-width: 10vh;
   flex: 1 50;
   margin: 3vh;
 }
@@ -131,9 +132,19 @@ form {
   align-items: center;
 }
 
+.card-body{
+  display: flex;
+  justify-content: center;
+}
+.form-control {
+  display: flex;
+  justify-content: center;
+}
+
 .card-footer a{
   margin: 1vh 1vh;
 }
+
 
 /* .list-group-item {
   overflow: hidden; 
@@ -181,3 +192,4 @@ form {
 #autocomplete {
   margin: 4vh;
 }
+

@@ -5,8 +5,8 @@ const revSchema = new Schema({
   name: String,
   date: Date,
   address: String,
+  localArea: String,
   molotovScale: Number,
-  description: String,
   participants: [{type: Schema.Types.ObjectId, ref: 'User'}],
   location: {
     type: {
@@ -15,7 +15,7 @@ const revSchema = new Schema({
     },
     coordinates: [Number]
   },
-  callToAction: String,
+  manifesto: String,
   creator: {type: Schema.Types.ObjectId, ref: 'User'}
 
 }, {

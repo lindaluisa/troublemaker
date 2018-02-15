@@ -20,6 +20,7 @@
 // const info = {
 //   modalTitle : 'Agile Revolution',
 //   voice : 'UK English Male',
+//   localArea : 'Barcelona',
 //   gifUrl : '/images/manifesto.gif',
 //   date : '17 February 2018',
 //   address : 'Carrer de Pamplona 96, Barcelona',
@@ -48,10 +49,11 @@ function SpeachModal (speachInfo) {
   const self = this;
   self.modalTitle = speachInfo.modalTitle;
   self.voice = speachInfo.voice;
+  self.localArea = speachInfo.localArea;
   self.gifUrl = speachInfo.gifUrl;
   self.gifElement = createElementFromHTML('<img id="gifId" data-animated-src=' + self.gifUrl + ' data-autoplay="0"/>');
   self.gifObject = self.newSuperGif(self.gifElement);
-  self.greetings = 'Greetings citizens of the world. ';
+  self.greetings = 'Greetings citizens of ' + self.localArea + '. ';
   self.date = speachInfo.date;
   self.address = speachInfo.address;
   self.manifesto = speachInfo.manifesto + ' ';

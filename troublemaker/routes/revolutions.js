@@ -137,14 +137,14 @@ router.post('/create-rev', (req, res, next) => {
   const address = req.body.address;
   const latitude = req.body.revlat;
   const longitude = req.body.revlng;
+  const localArea = req.body.vicinity;
   const molotovScale = req.body.molotovScale;
-  const description = req.body.description;
   const creator = req.session.currentUser._id;
   const participants = [creator];
-  const callToAction = req.body.call;
+  const manifesto = req.body.manifesto;
 
   console.log('req.session.currentUser', creator);
-  if (name === '' || latitude === '' || longitude === '' || molotovScale === '' || description === '' || callToAction === '') {
+  if (name === '' || latitude === '' || longitude === '' || molotovScale === '' || localArea === '' || manifesto === '') {
     const message = 'All fields are required';
     return res.render('create-rev', {message});
   }
@@ -153,15 +153,15 @@ router.post('/create-rev', (req, res, next) => {
     name: name,
     date: date,
     address: address,
+    localArea: localArea,
     location: {
       type: 'Point',
       coordinates: [latitude, longitude]
     },
     molotovScale: molotovScale,
-    description: description,
     creator: creator,
     participants: participants,
-    callToAction: callToAction
+    manifesto: manifesto
   });
 
   newRev.save()
@@ -175,12 +175,6 @@ router.post('/create-rev', (req, res, next) => {
 // arg results are the results of find function (dbs)
 router.get('/revolutions', (req, res, next) => {
   Revolution.find({}).populate('creator')
-    .then((results) => {
-      return results.map((result) => {
-        result.description = result.description.substring(0, 200) + '...';
-        return result;
-      });
-    })
     .then((results) => {
       return results.filter((result) => {
         return result.date.getTime() >= Date.now();

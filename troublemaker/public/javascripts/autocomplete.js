@@ -13,12 +13,15 @@ function getInfoPlace () {
   const newPlace = autocomplete.getPlace();
   const revLat = newPlace.geometry.location.lat();
   const revLng = newPlace.geometry.location.lng();
+  const vicinity = newPlace.address_components[2].long_name;
 
   const revLatElement = document.getElementById('rev-lat');
   const revLngElement = document.getElementById('rev-lng');
+  const vicinityElement = document.getElementById('vicinity');
 
   revLatElement.value = revLat;
   revLngElement.value = revLng;
+  vicinityElement.value = vicinity;
 }
 
 // if (navigator.geolocation) {

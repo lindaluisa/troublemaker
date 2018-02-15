@@ -1,25 +1,30 @@
 <div class="site-header">
     <h2>Revolutions in your local area</h2>
 </div>
-<div class="container main-body rev-box">
-    <div class="card test-map">
-        <div class="card-body">
-            <div id="map"></div>
-        </div>
-        <a href="/create-rev" class="btn btn-danger">Create your own Revolution</a>
-    </div>
-    <div class="list-group rev-list">
-      <% revolutions.forEach((revolution)=> { %>
-        <a href="/revolution-details/<%= revolution._id %>" class="list-group-item list-group-item-action flex-column align-items-start">
-            <div class="d-flex w-100 justify-content-between">
-              <h5 class="mb-1"><%= revolution.name %></h5>
-              <small><strong>By comrade: </strong> <%= revolution.creator.username %></small>
+<div class="container main-body">
+    <div class="rev-box">
+        <div class="card">
+            <div class="card-body">
+                <div id="map" class="card-text"></div>
             </div>
-            <p class="mb-1"><%= revolution.description %></p>
-            <small><strong>When: </strong><%= revolution.date.toLocaleDateString() %></small>
-            <p><small><strong>Where: </strong><%= revolution.address %></small></p>
-          </a>
-      <% }) %>
+            
+            <a href="/create-rev" class="btn btn-danger">Create your own Revolution</a>
+                <div class="list-group rev-list">
+                <% revolutions.forEach((revolution)=> { %>
+                    <a href="/revolution-details/<%= revolution._id %>" class="list-group-item list-group-item-action flex-column align-items-start">
+                        <div class="d-flex w-100 justify-content-between">
+                        <h5 class="mb-1"><%= revolution.name %></h5>
+                        <small><i class="fa fa-user"></i> <%= revolution.creator.username %></small>
+                        </div>
+                        <!-- <p class="mb-1"><%= revolution.description %></p> -->
+                        <p>  <small><i class="fa fa-calendar"></i> <%=  revolution.date.toLocaleDateString() %></small></p>
+                        <p><small><i class="fa fa-map-marker"></i> <%= revolution.address %></small></p>
+                    </a>
+                <% }) %>
+                </div>
+
+
+        </div>
     </div>
 </div>
 <script type="text/javascript">

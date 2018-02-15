@@ -15,20 +15,25 @@
     <div class="card-header rev-details-header">
       <div class="title-and-author">
           <h5 class="card-title"><%= revolution.name %></h5>
-          <h6 class="card-subtitle mb-2 text-muted"><small>by <%= revolution.creator.username %></small></h6>
+          <h6 class="card-subtitle mb-2 text-muted"><small><i class="fa fa-user"></i> <%= revolution.creator.username %></small></h6>
       </div>
       <div class="participants-intensity">
-          <p class="text-muted">Participants: <span class="badge badge-dark badge-pill"><%= revolution.participants.length %></span></p>
-          <p class="text-muted">Intensity: <span class="badge badge-dark badge-pill"><%= revolution.molotovScale %></span></p>
+          <p class="text-muted"><i class="fa fa-users"> </i> <span class="badge badge-dark badge-pill"><%= revolution.participants.length %></span></p>
+          <p class="text-muted"><i class="fa fa-bomb">  </i><span class="badge badge-dark badge-pill"><%= revolution.molotovScale %></span></p>
       </div>        
     </div>
     <div class="card-body">
-      <p class="card-text"><%= revolution.description %></p>
+        <!-- <div class=" test-map"> -->
+            <!-- <div class="card-body"> -->
+              <div id="map" class="card-text"></div>
+            <!-- </div> -->
+        <!-- </div> -->
+      <!-- <p class="card-text"><%= revolution.description %></p> -->
            
     </div>
     <div class="card-footer text-muted rev-details-header">
       <div>
-          <a href="#" class="btn btn-outline-danger btn-sm" data-toggle="modal" data-target="#speachModal"><i class="fa fa-play"></i> Call to action</a>  
+          <a href="#" class="btn btn-outline-danger btn-sm" data-toggle="modal" data-target="#speachModal"><i class="fa fa-play"></i>Manifesto</a>  
           <% if(isParticipant){ %>
             <form action="/leave/<%= revolution._id %>" method="POST">
               <button type="submit" class="btn btn-outline-dark btn-sm">Give up the fight</button>
@@ -43,14 +48,14 @@
       <div>
           <p><i class="fa fa-calendar"></i> <%= revolution.date.toLocaleDateString() %></p>
           <p><i class="fa fa-map-marker"></i> <%= revolution.address%></p>
-      </div>       
+      </div>
     </div>
   </div>
-    <div class="card test-map">
+    <!-- <div class="card test-map">
       <div class="card-body">
         <div id="map"></div>
       </div>
-  </div>
+  </div> -->
 </div>
 <script type="text/javascript">
   var revolution = <%- JSON.stringify(revolution) %>;
@@ -61,10 +66,11 @@
   const info = {
       modalTitle : <%- JSON.stringify(revolution.name) %>,
       voice : 'UK English Male',
+      localArea : <%- JSON.stringify(revolution.localArea) %>,
       gifUrl : '/images/manifesto.gif',
       date : <%- JSON.stringify(revolution.date.toLocaleDateString()) %>,
       address : <%- JSON.stringify(revolution.address)%>,
-      manifesto : <%- JSON.stringify(revolution.callToAction) %>,
+      manifesto : <%- JSON.stringify(revolution.manifesto) %>,
   }
 
   const Modal = new SpeachModal(info);
