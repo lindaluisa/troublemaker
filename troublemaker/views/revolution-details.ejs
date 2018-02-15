@@ -1,3 +1,11 @@
+<script src="/javascripts/gif-modal/libgif.min.js"></script>
+<script src="/javascripts/gif-modal/voice.min.js"></script>
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+<script src="/javascripts/gif-modal/gif-speach-modal.js"></script>
+
+
 <div class="site-header">
   <h2><a class= "text-muted" href="/revolutions"><i class="fa fa-chevron-circle-left fa-2x"></i></a> </h2>
 </div>
@@ -20,7 +28,7 @@
     </div>
     <div class="card-footer text-muted rev-details-header">
       <div>
-          <a href="#" class="btn btn-outline-danger btn-sm"><i class="fa fa-play"></i> Call to action</a>  
+          <a href="#" class="btn btn-outline-danger btn-sm" data-toggle="modal" data-target="#speachModal"><i class="fa fa-play"></i> Call to action</a>  
           <% if(isParticipant){ %>
             <form action="/leave/<%= revolution._id %>" method="POST">
               <button type="submit" class="btn btn-outline-dark btn-sm">Give up the fight</button>
@@ -34,7 +42,7 @@
       </div>
       <div>
           <p><i class="fa fa-calendar"></i> <%= revolution.date.toLocaleDateString() %></p>
-          <p><i class="fa fa-map-marker"></i> Plaza Catalunya 34, Barcelona</p>
+          <p><i class="fa fa-map-marker"></i> <%= revolution.address%></p>
       </div>       
     </div>
   </div>
@@ -47,5 +55,19 @@
 <script type="text/javascript">
   var revolution = <%- JSON.stringify(revolution) %>;
   var userLocation = <%- JSON.stringify(userLocation) %>;
+  </script>
+
+  <script type="text/javascript"> 
+  const info = {
+      modalTitle : <%- JSON.stringify(revolution.name) %>,
+      voice : 'UK English Male',
+      gifUrl : '/images/manifesto.gif',
+      date : <%- JSON.stringify(revolution.date.toLocaleDateString()) %>,
+      address : <%- JSON.stringify(revolution.address)%>,
+      manifesto : <%- JSON.stringify(revolution.callToAction) %>,
+  }
+
+  const Modal = new SpeachModal(info);
+  Modal.ready();
 </script>
 <script src="/javascripts/revolution-detail.js"></script>
